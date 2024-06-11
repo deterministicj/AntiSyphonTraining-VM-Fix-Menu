@@ -2,7 +2,7 @@
 
 This project contains scripts created to automatically disable automatic Windows Store and Windows Updates.
 
-The update of Store applications and Windows Updates are known to break some funcionality of the VM.
+The install of Store application updates and Windows Updates are known to break some funcionality of the VM.
 
 # Getting Started
 
