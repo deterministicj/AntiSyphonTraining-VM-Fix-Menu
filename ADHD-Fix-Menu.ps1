@@ -35,8 +35,10 @@ do {
     # Check for valid input
     if ($input -eq "1") {
         DisableUpdates
+        break
     } elseif ($input -eq "2") {
         HashcatFix
+        break
     } elseif ($input -eq "q") {
         # Exit loop if 'q' is entered
         break
