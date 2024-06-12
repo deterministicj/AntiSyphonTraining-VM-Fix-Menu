@@ -4,7 +4,6 @@ Write-Output "`n---------------------------------------------------"
 Write-Output "1. Disable automatic updates"
 Write-Output "2. Fix Hashcat lab - CL_DEVICE_NOT_AVAILABLE error"
 Write-Output "---------------------------------------------------`n"
-$input = Read-Host -Prompt "Which option would you like to select? (1/2/q to exit)"
 
 Function DisableUpdates {
     #Create Disable Updates task if it does not exist
@@ -29,10 +28,20 @@ Function HashcatFix {
     Write-Output "Update installed, please try running Hashcat again"
 }
 
-if ($input -eq 1) {
-    DisableUpdates
-} elseif ($input -eq 2) {
-    HashcatFix
-} elseif ($input -eq "q") {
-
-}
+# Loop for input
+do {
+    $input = Read-Host -Prompt "Which option would you like to select? (1,2, or q to exit)"
+    
+    # Check for valid input
+    if ($input -eq "1") {
+        DisableUpdates
+    } elseif ($input -eq "2") {
+        HashcatFix
+    } elseif ($input -eq "q") {
+        # Exit loop if 'q' is entered
+        break
+    } else {
+        # Handle invalid input
+        Write-Output "Invalid option. Please select a valid option (1, 2, or q to exit)."
+    }
+} until ($false)
