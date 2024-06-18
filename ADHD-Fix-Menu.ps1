@@ -11,7 +11,7 @@ $menu = @"
 Options
 ---------------------------------------------------
 1. Disable automatic updates
-2. Fix Hashcat lab - CL_DEVICE_NOT_AVAILABLE error
+2. Fix Password Cracking lab - CL_DEVICE_NOT_AVAILABLE
 ---------------------------------------------------
 "@
 
@@ -39,7 +39,7 @@ Function DisableUpdates {
             Write-Host "There was an issue creating the task, please try again"
         }
     } else {
-        Write-Host "Task already exists"
+        Write-Host "Task already exists - Automatic updates have already been disabled"
     }
 }
 
@@ -48,16 +48,16 @@ Function HashcatFix {
     Write-Host "Downloading Intel OpenCL Update..."
     Invoke-WebRequest -Uri http://registrationcenter-download.intel.com/akdlm/irc_nas/12512/opencl_runtime_16.1.2_x64_setup.msi -OutFile C:\Users\ADHD\Downloads\opencl_runtime_16.1.2_x64_setup.msi
     msiexec /i C:\Users\adhd\Downloads\opencl_runtime_16.1.2_x64_setup.msi /quiet
-    
+
     try {
         $regPath = 'HKLM:\SOFTWARE\Intel\OpenCL'
         $regKey = 'cpu_version'
         $openCLVersion = Get-ItemPropertyValue -Path $regPath -Name $regKey -ErrorAction SilentlyContinue
-
+        
         if ($openCLVersion -eq "6.4.0.37") {
             Write-Host "Update installed, please try running Hashcat again"
         } else {
-            Write-Host "Update failed, please try installing again"
+            Write-Host "Update failed ($openCLVersion), please try installing again"
         }    
 
     } catch {
